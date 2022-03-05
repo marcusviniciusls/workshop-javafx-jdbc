@@ -118,7 +118,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                br.com.udemy.workshopjavafxjdbc/br.com.udemy.workshopjavafxjdbc.HelloApplication
+                                br.com.udemy.workshopjavafxjdbc/br.com.udemy.workshopjavafxjdbc.MainView
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
