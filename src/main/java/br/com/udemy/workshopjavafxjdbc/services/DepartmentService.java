@@ -1,6 +1,6 @@
 package br.com.udemy.workshopjavafxjdbc.services;
 
-import br.com.udemy.workshopjavafxjdbc.entities.Department;
+import br.com.udemy.workshopjavafxjdbc.Department;
 
 import java.util.ArrayList;
 import java.util.List;
