@@ -1,18 +1,27 @@
 package br.com.udemy.workshopjavafxjdbc.controller;
 
 import br.com.udemy.workshopjavafxjdbc.HelloApplication;
+import br.com.udemy.workshopjavafxjdbc.gui.utils.Alerts;
+import br.com.udemy.workshopjavafxjdbc.gui.utils.Utils;
 import br.com.udemy.workshopjavafxjdbc.model.entities.Department;
 import br.com.udemy.workshopjavafxjdbc.model.services.DepartmentService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -31,8 +40,9 @@ public class DepartmentListController implements Initializable {
     private ObservableList<Department> obsList;
 
     @FXML
-    public void onBtNewAction(){
-        System.out.println("onBtNewAction");
+    public void onBtNewAction(ActionEvent actionEvent){
+        Stage parentStage = Utils.currentStage(actionEvent);
+        createDialogForm(parentStage, "DepartmentForm.fxml");
     }
 
     public void setDepartmentService(DepartmentService departmentService){
@@ -58,5 +68,21 @@ public class DepartmentListController implements Initializable {
         List<Department> listDepartment = departmentService.findAll();
         obsList = FXCollections.observableArrayList(listDepartment);
         tableViewDepartment.setItems(obsList);
+    }
+
+    private void createDialogForm(Stage parentStage, String absoluteName){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            Pane pane = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Enter Department data");
+            dialogStage.setScene(new Scene(pane));
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(parentStage);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.showAndWait();
+        } catch (IOException ioException){
+            Alerts.showAlert("IO Exception", "Error loading view", ioException.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 }
