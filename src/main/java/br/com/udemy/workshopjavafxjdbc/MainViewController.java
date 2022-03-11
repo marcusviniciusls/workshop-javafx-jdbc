@@ -1,7 +1,9 @@
 package br.com.udemy.workshopjavafxjdbc;
 
+import br.com.udemy.workshopjavafxjdbc.HelloApplication;
+import br.com.udemy.workshopjavafxjdbc.controller.DepartmentListController;
 import br.com.udemy.workshopjavafxjdbc.gui.utils.Alerts;
-import br.com.udemy.workshopjavafxjdbc.services.DepartmentService;
+import br.com.udemy.workshopjavafxjdbc.model.services.DepartmentService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

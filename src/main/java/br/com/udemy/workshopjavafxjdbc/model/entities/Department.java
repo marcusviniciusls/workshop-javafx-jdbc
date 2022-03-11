@@ -1,4 +1,4 @@
-package br.com.udemy.workshopjavafxjdbc;
+package br.com.udemy.workshopjavafxjdbc.model.entities;
 
 import java.io.Serializable;
 

@@ -1,6 +1,8 @@
-package br.com.udemy.workshopjavafxjdbc;
+package br.com.udemy.workshopjavafxjdbc.controller;
 
-import br.com.udemy.workshopjavafxjdbc.services.DepartmentService;
+import br.com.udemy.workshopjavafxjdbc.HelloApplication;
+import br.com.udemy.workshopjavafxjdbc.model.entities.Department;
+import br.com.udemy.workshopjavafxjdbc.model.services.DepartmentService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,7 +57,6 @@ public class DepartmentListController implements Initializable {
         }
         List<Department> listDepartment = departmentService.findAll();
         obsList = FXCollections.observableArrayList(listDepartment);
-        // Coodigo abaixo nao funciona
         tableViewDepartment.setItems(obsList);
     }
 }

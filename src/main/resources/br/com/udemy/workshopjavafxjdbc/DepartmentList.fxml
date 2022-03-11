@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.udemy.workshopjavafxjdbc.DepartmentListController">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.udemy.workshopjavafxjdbc.controller.DepartmentListController">
    <children>
       <Label prefHeight="0.0" prefWidth="364.0" text="Departament Registration">
          <font>
