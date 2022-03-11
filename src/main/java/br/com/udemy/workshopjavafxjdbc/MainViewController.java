@@ -1,6 +1,7 @@
 package br.com.udemy.workshopjavafxjdbc;
 
 import br.com.udemy.workshopjavafxjdbc.gui.utils.Alerts;
+import br.com.udemy.workshopjavafxjdbc.services.DepartmentService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +31,7 @@ public class MainViewController implements Initializable {
     }
     @FXML
     public void onMenuItemDepartmentAction(){
-        loadView("DepartmentList.fxml");
+        loadView2("DepartmentList.fxml");
     }
     @FXML
     public void onMenuItemAboutAction(){
@@ -56,6 +57,25 @@ public class MainViewController implements Initializable {
         } catch (IOException ioException){
             Alerts.showAlert("IO Exception", "Error loading view", ioException.getMessage(), Alert.AlertType.ERROR);
         }
+    }
 
+    private synchronized void loadView2(String absoluteName){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            VBox vBox = loader.load();
+            Scene mainScene = HelloApplication.getMainScene();
+            VBox mainVbox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+
+            Node mainMenu = mainVbox.getChildren().get(0);
+            mainVbox.getChildren().clear();
+            mainVbox.getChildren().add(mainMenu);
+            mainVbox.getChildren().addAll(vBox.getChildren());
+
+            DepartmentListController controller = loader.getController();
+            controller.setDepartmentService(new DepartmentService());
+            controller.updateTableView();
+        } catch (IOException ioException){
+            Alerts.showAlert("IO Exception", "Error loading view", ioException.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 }
