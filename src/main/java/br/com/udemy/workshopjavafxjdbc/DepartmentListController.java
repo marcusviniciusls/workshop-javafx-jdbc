@@ -1,4 +1,4 @@
-package br.com.udemy.workshopjavafxjdbc.controller;
+package br.com.udemy.workshopjavafxjdbc;
 
 import br.com.udemy.workshopjavafxjdbc.HelloApplication;
 import br.com.udemy.workshopjavafxjdbc.gui.utils.Alerts;

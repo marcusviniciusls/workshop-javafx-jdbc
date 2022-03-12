@@ -15,6 +15,4 @@ module br.com.udemy.workshopjavafxjdbc {
     exports br.com.udemy.workshopjavafxjdbc;
     exports br.com.udemy.workshopjavafxjdbc.model.entities;
     opens br.com.udemy.workshopjavafxjdbc.model.entities to javafx.fxml;
-    exports br.com.udemy.workshopjavafxjdbc.controller;
-    opens br.com.udemy.workshopjavafxjdbc.controller to javafx.fxml;
 }
