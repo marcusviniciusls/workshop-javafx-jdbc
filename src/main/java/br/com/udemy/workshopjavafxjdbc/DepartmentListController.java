@@ -2,6 +2,7 @@ package br.com.udemy.workshopjavafxjdbc;
 
 import br.com.udemy.workshopjavafxjdbc.HelloApplication;
 import br.com.udemy.workshopjavafxjdbc.gui.utils.Alerts;
+import br.com.udemy.workshopjavafxjdbc.gui.utils.DataChangeListener;
 import br.com.udemy.workshopjavafxjdbc.gui.utils.Utils;
 import br.com.udemy.workshopjavafxjdbc.model.entities.Department;
 import br.com.udemy.workshopjavafxjdbc.model.services.DepartmentService;
@@ -26,7 +27,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DepartmentListController implements Initializable {
+public class DepartmentListController implements Initializable, DataChangeListener {
 
     private DepartmentService departmentService;
     @FXML
@@ -78,6 +79,7 @@ public class DepartmentListController implements Initializable {
             DepartmentFormController departmentFormController = loader.getController();
             departmentFormController.setDepartment(department);
             departmentFormController.setDepartmentService(new DepartmentService());
+            departmentFormController.subscribeDataChangeListener(this);
             departmentFormController.updateFormData();
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Enter Department data");
@@ -89,5 +91,10 @@ public class DepartmentListController implements Initializable {
         } catch (IOException ioException){
             Alerts.showAlert("IO Exception", "Error loading view", ioException.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    @Override
+    public void onDataChanged() {
+        updateTableView();
     }
 }
