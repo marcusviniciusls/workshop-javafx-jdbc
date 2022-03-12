@@ -89,25 +89,25 @@ public class SellerListController implements Initializable, DataChangeListener {
         initRemoveButtons();
     }
 
-    private void createDialogForm(Seller Seller, Stage parentStage, String absoluteName){
-        //try{
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-            //Pane pane = loader.load();
-            //SellerFormController sellerFormController = loader.getController();
-            //sellerFormController.setSeller(seller);
-            //sellerFormController.setSellerService(new SellerService());
-           // sellerFormController.subscribeDataChangeListener(this);
-            //sellerFormController.updateFormData();
-            //Stage dialogStage = new Stage();
-            //dialogStage.setTitle("Enter Seller data");
-            //dialogStage.setScene(new Scene(pane));
-            //dialogStage.setResizable(false);
-            //dialogStage.initOwner(parentStage);
-            //dialogStage.initModality(Modality.WINDOW_MODAL);
-            //dialogStage.showAndWait();
-        //} catch (IOException ioException){
-            //Alerts.showAlert("IO Exception", "Error loading view", ioException.getMessage(), Alert.AlertType.ERROR);
-        //}
+    private void createDialogForm(Seller seller, Stage parentStage, String absoluteName){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            Pane pane = loader.load();
+            SellerFormController sellerFormController = loader.getController();
+            sellerFormController.setSeller(seller);
+            sellerFormController.setSellerService(new SellerService());
+            sellerFormController.subscribeDataChangeListener(this);
+            sellerFormController.updateFormData();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Enter Seller data");
+            dialogStage.setScene(new Scene(pane));
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(parentStage);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.showAndWait();
+        } catch (IOException ioException){
+            Alerts.showAlert("IO Exception", "Error loading view", ioException.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @Override
