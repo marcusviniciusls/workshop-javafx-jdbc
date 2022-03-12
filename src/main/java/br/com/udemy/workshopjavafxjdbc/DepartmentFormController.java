@@ -1,6 +1,7 @@
 package br.com.udemy.workshopjavafxjdbc;
 
 import br.com.udemy.workshopjavafxjdbc.gui.utils.Constraints;
+import br.com.udemy.workshopjavafxjdbc.model.entities.Department;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -11,6 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DepartmentFormController implements Initializable {
+
+    private Department department;
 
     @FXML
     private TextField txtId;
@@ -37,6 +40,10 @@ public class DepartmentFormController implements Initializable {
         System.out.println("onBtSaveCancel");
     }
 
+    public void setDepartment(Department department){
+        this.department = department;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initializerNodes();
@@ -45,5 +52,13 @@ public class DepartmentFormController implements Initializable {
     private void initializerNodes() {
         Constraints.setTextFieldInteger(txtId);
         Constraints.setTextFieldMaxLength(txtName, 30);
+    }
+
+    public void updateFormData(){
+        if (this.department == null){
+            throw new IllegalStateException("Department was null");
+        }
+        txtId.setText(String.valueOf(this.department.getId()));
+        txtName.setText(this.department.getName());
     }
 }
