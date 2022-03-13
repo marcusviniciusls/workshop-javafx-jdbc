@@ -19,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -99,19 +100,40 @@ public class SellerFormController implements Initializable {
     }
 
     private Seller getFormData() {
-        Seller Seller = new Seller();
+        Seller seller = new Seller();
         ValidationException validationException = new ValidationException("Validation Error");
         Integer id = Utils.tryParseToInt(txtId.getText());
-        Seller.setId(id);
+        seller.setId(id);
         if (txtName.getText() == null || txtName.getText().trim().equals("")){
             validationException.addError("name", "Field can't be empty");
         }
         String name = txtName.getText();
-        Seller.setName(name);
+        seller.setName(name);
+        if (txtEmail.getText() == null || txtEmail.getText().trim().equals("")){
+            validationException.addError("email", "Field can't be empty");
+        }
+        String email = txtEmail.getText();
+        seller.setEmail(email);
+
+        if (txtBaseSalary.getText() == null || txtBaseSalary.getText().trim().equals("")){
+            validationException.addError("basesalary", "Field can't be empty");
+        }
+        String baseSalary = txtBaseSalary.getText();
+        seller.setBaseSalary(Utils.tryParseToDouble(baseSalary));
+
+        if (dpBirthDate.getValue() == null){
+            validationException.addError("birthDate", "");
+        } else {
+            Instant instant = Instant.from(dpBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()));
+            seller.setBirthDate(Date.from(instant));
+        }
+
+        seller.setDepartment(comboBoxDepartment.getValue());
+
         if (validationException.getErrors().size() > 0){
             throw validationException;
         }
-        return Seller;
+        return seller;
     }
 
     @FXML
@@ -174,6 +196,26 @@ public class SellerFormController implements Initializable {
         Set<String> fields = errors.keySet();
         if (fields.contains("name")) {
             labelErrorName.setText(errors.get("name"));
+        } else {
+            labelErrorName.setText("");
+        }
+
+        if (fields.contains("email")) {
+            labelErrorEmail.setText(errors.get("email"));
+        } else {
+            labelErrorEmail.setText("");
+        }
+
+        if (fields.contains("basesalary")) {
+            labelErrorBaseSalary.setText(errors.get("basesalary"));
+        } else {
+            labelErrorBaseSalary.setText("");
+        }
+
+        if (fields.contains("birthDate")) {
+            labelErrorBirthDate.setText(errors.get("birthDate"));
+        } else {
+            labelErrorBirthDate.setText("");
         }
     }
 
